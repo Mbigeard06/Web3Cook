@@ -12,7 +12,6 @@ async function getBalance(address: string) {
     try {
         // Récupérer le solde en Wei
         const balanceWei = await web3.eth.getBalance(address);
-
         // Convertir le solde en Ether
         const balanceEther = web3.utils.fromWei(balanceWei, 'ether');
 
