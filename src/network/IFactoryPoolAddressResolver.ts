@@ -1,4 +1,4 @@
-export interface IFactoryPoolAddressResolver {
+export interface IPoolAddressResolver {
     getPoolAddress(
         chainId: number,
         factoryAddress: string,
