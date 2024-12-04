@@ -9,7 +9,7 @@ class DexFactory{
     /**
      * 
      * @param name dex's name
-     * @returns Dex object
+     * @returns Dex ob
      */
     getDex(name : string): Dex{
         const dex = this.dexRegistry.get(name);
