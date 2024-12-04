@@ -1,4 +1,6 @@
-class UniswapV3Base extends Dex{
+import { Dex } from "../Dex";
+
+export class UniswapV3Base extends Dex{
     
     public getPoolInfo(tokenA: string, tokenB: string): Promise<PoolInfo> {
         throw new Error("Method not implemented.");

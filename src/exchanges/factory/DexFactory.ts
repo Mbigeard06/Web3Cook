@@ -1,6 +1,7 @@
 import { Dex } from "../Dex";
+import { DexFactoryInitialisator } from "./DexFactoryInitialisator";
 
-class DexFactory{
+export class DexFactory{
     //Dex registry
     private dexRegistry : Map<string, Dex>;
 

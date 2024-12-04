@@ -1,5 +1,8 @@
+import { UniswapV3Base } from "../dexImplementation/UniswapV3Base";
+import { DexFactory } from "./DexFactory";
+
 //Singleton
-class DexFactoryInitialisator{
+export class DexFactoryInitialisator{
     private static instance: DexFactoryInitialisator;
 
     /**
@@ -19,6 +22,6 @@ class DexFactoryInitialisator{
      * @param dexFactory factory to initalize
      */
     public static initializeFactory(dexFactory : DexFactory): void{
-        dexFactory.registerDex(new Dex('Uniswap',3,8453,'0x1F98431c8aD98523631AE4a59f267346ea31F984'))
+        dexFactory.registerDex("UniswapV3Base", new UniswapV3Base('Uniswap',3,8453,'0x1F98431c8aD98523631AE4a59f267346ea31F984'))
     }
 }

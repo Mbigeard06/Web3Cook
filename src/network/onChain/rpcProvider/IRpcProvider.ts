@@ -1,9 +1,10 @@
 import { JsonRpcProvider } from "ethers";
+import { getInfuraNetwork } from "./chains";
 
 export interface IRpcProvider {
     /**
      * 
      * @returns RpcProvider
      */
-    getProvider(chainId : number): JsonRpcProvider;
+    getProvider(chainId: keyof typeof getInfuraNetwork): JsonRpcProvider;
 }
