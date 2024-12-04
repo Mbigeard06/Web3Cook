@@ -1,9 +1,12 @@
+import { Dex } from "../Dex";
+
 class DexFactory{
     //Dex registry
     private dexRegistry : Map<string, Dex>;
 
     constructor() {
         this.dexRegistry = new Map();
+        DexFactoryInitialisator.initializeFactory(this);
     }
 
     /**

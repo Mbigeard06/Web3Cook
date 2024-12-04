@@ -1,12 +1,16 @@
+import { IPoolAddressResolver } from "../network/onChain/IPoolAddressResolver";
+import { PoolAddressResolver } from "../network/onChain/PoolAddressResolver";
+
 /**
  * Abstract base class for Decentralized Exchange (DEX) interactions
  */
-abstract class Dex {
+export abstract class Dex {
     protected name: string;
     protected version: number;
     protected chainId: number;
     protected factoryAddress: string;
-    protected routerAddress: string;
+
+    protected poolAddressResolver : IPoolAddressResolver;
 
     private pools: Map<TokenPair, string> = new Map();
 
@@ -16,20 +20,18 @@ abstract class Dex {
      * @param version Dex's version
      * @param chainId Blockchain network ID
      * @param factoryAddress Contract address of the DEX factory
-     * @param routerAddress Contract address of the DEX router
      */
     constructor(
         name: string,
         version: number,
         chainId: number,
         factoryAddress: string,
-        routerAddress: string
     ) {
         this.name = name;
         this.version = version;
         this.chainId = chainId;
         this.factoryAddress = factoryAddress;
-        this.routerAddress = routerAddress;
+        this.poolAddressResolver = new PoolAddressResolver();
     }
 
     // Existing getters
@@ -48,10 +50,6 @@ abstract class Dex {
 
     public getFactoryAddress(): string {
         return this.factoryAddress;
-    }
-
-    public getRouterAddress(): string {
-        return this.routerAddress;
     }
 
     // Abstract methods to be implemented by child classes
