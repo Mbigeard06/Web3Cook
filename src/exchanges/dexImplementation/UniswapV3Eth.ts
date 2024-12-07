@@ -1,7 +1,7 @@
 import { getInfuraNetwork } from "../../network/onChain/rpcProvider/chains";
 import { Dex } from "../Dex";
 
-export class UniswapV3Base extends Dex{
+export class UniswapV3Eth extends Dex{
 
     public async addLiquidityPool(pair: TokenPair): Promise<void> {
         const address = await this.poolAddressResolver.getPoolAddress(this.chainId as keyof typeof getInfuraNetwork, this.factoryAddress, pair.tokenA, pair.tokenB );

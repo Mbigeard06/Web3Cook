@@ -9,9 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UniswapV3Base = void 0;
+exports.UniswapV3Eth = void 0;
 const Dex_1 = require("../Dex");
-class UniswapV3Base extends Dex_1.Dex {
+class UniswapV3Eth extends Dex_1.Dex {
     addLiquidityPool(pair) {
         return __awaiter(this, void 0, void 0, function* () {
             const address = yield this.poolAddressResolver.getPoolAddress(this.chainId, this.factoryAddress, pair.tokenA, pair.tokenB);
@@ -28,4 +28,4 @@ class UniswapV3Base extends Dex_1.Dex {
         throw new Error("Method not implemented.");
     }
 }
-exports.UniswapV3Base = UniswapV3Base;
+exports.UniswapV3Eth = UniswapV3Eth;

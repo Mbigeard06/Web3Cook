@@ -35,13 +35,5 @@ class Dex {
     getFactoryAddress() {
         return this.factoryAddress;
     }
-    /**
-     *
-     * @param pair pool's pair
-     * @param poolAddress pool's address
-     */
-    addPoolAddress(pair, poolAddress) {
-        this.pools.set(pair, poolAddress);
-    }
 }
 exports.Dex = Dex;

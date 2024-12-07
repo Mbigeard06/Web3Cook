@@ -1,3 +1,5 @@
+import { getInfuraNetwork } from "./rpcProvider/chains";
+
 export interface IPoolAddressResolver {
     /**
      * 
@@ -7,7 +9,7 @@ export interface IPoolAddressResolver {
      * @param tokenB 
      */
     getPoolAddress(
-        chainId: number,
+        chainId: keyof typeof getInfuraNetwork,
         factoryAddress: string,
         tokenA: string,
         tokenB: string

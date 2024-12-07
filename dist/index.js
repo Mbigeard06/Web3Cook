@@ -5,19 +5,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const InfuraRpcProvider_1 = require("./network/onChain/rpcProvider/InfuraRpcProvider");
-// Crée une instance de InfuraRpcProvider
-let infuraProvider = new InfuraRpcProvider_1.InfuraRpcProvider();
+const DexFactory_1 = require("./exchanges/factory/DexFactory");
 try {
-    // Initialisation du provider avec le chainId 8453 (Exemple : Base mainnet)
-    let rpcProvider = infuraProvider.getProvider(8453);
-    // Requête pour obtenir le dernier numéro de bloc
-    rpcProvider.getBlockNumber().then((blockNumber) => {
-        console.log(`Dernier numéro de bloc pour chainId 8453 : ${blockNumber}`);
-    }).catch((error) => {
-        console.error("Erreur lors de la récupération du numéro de bloc :", error);
-    });
+    const factory = new DexFactory_1.DexFactory();
+    // Création d'un objet TokenPair
+    const tokenPair = {
+        tokenA: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", // WETH
+        tokenB: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // USDC
+    };
+    // Utilisation de la méthode addLiquidityPool
+    console.log("Dex's name : ");
+    console.log(factory.getDex("UniswapV3Eth").getName());
+    factory.getDex("UniswapV3Eth").addLiquidityPool(tokenPair);
 }
 catch (error) {
-    console.error("Erreur lors de la configuration du provider :", error);
+    console.error("Erreur lors de l'ajout de la liquidity pool :", error);
 }

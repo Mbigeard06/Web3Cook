@@ -1,5 +1,6 @@
 import { IPoolAddressResolver } from "../network/onChain/IPoolAddressResolver";
 import { PoolAddressResolver } from "../network/onChain/PoolAddressResolver";
+import { getInfuraNetwork } from "../network/onChain/rpcProvider/chains";
 
 /**
  * Abstract base class for Decentralized Exchange (DEX) interactions
@@ -12,7 +13,7 @@ export abstract class Dex {
 
     protected poolAddressResolver : IPoolAddressResolver;
 
-    private pools: Map<TokenPair, string> = new Map();
+    protected pools: Map<TokenPair, string> = new Map();
 
     /**
      * Constructor for DEX
@@ -71,19 +72,9 @@ export abstract class Dex {
     public abstract getPoolPrice(tokenA: string, tokenB: string, amount: bigint): Promise<PriceInfo>;
 
     /**
-     * Retrieves liquidity for a specific pool
-     * @param tokenA Address of first token
-     * @param tokenB Address of second token
-     * @returns Promise with liquidity details
-     */
-    public abstract getPoolLiquidity(tokenA: string, tokenB: string): Promise<LiquidityInfo>;
-
-    /**
-     * 
+     * Add a new liquidity pool
      * @param pair pool's pair
      * @param poolAddress pool's address
      */
-    protected addPoolAddress(pair: TokenPair, poolAddress: string): void {
-        this.pools.set(pair, poolAddress);
-    }
+    public abstract addLiquidityPool(pair: TokenPair): Promise<void>;
 }
