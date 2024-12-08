@@ -1,4 +1,4 @@
-import { getInfuraNetwork } from "./rpcProvider/chains";
+import { getInfuraNetwork } from "../rpcProvider/chains";
 
 export interface IPoolAddressResolver {
     /**

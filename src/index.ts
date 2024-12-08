@@ -2,22 +2,31 @@ import { ethers } from "ethers";
 import dotenv from "dotenv";
 dotenv.config();
 import { InfuraRpcProvider } from "./network/onChain/rpcProvider/InfuraRpcProvider";
-import { DexFactory } from "./exchanges/factory/DexFactory";
+import { DexFactory } from "./logic/exchanges/factory/DexFactory";
+import { ChainFactory } from "./logic/chain/factory/ChainFactory";
 
 
 try {
-  const factory = new DexFactory();
+  const dexfactory = new DexFactory();
+  let chainFactory: ChainFactory = new ChainFactory();
+  //Get eth mainet
+  const ethMainet = chainFactory.getChain("Mainet");
+  //Register dex on the chain //Fix all UNISWAP V3 are the same juste the chain changes
+  ethMainet.setDex(dexfactory.getDex("UniswapV3Eth").getName(), dexfactory.getDex("UniswapV3Eth"));
+
+  console.log(ethMainet.getDex("UniswapV3Eth").getName());
 
   // Création d'un objet TokenPair
   const tokenPair: TokenPair = {
-    tokenA: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", // WETH
-    tokenB: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48", // USDC
+    tokenA: ethMainet.getTokenAddress("WETH"), // WETH
+    tokenB: ethMainet.getTokenAddress("USDC") // USDC
   };
 
-  // Utilisation de la méthode addLiquidityPool
-  console.log("Dex's name : ");
-  console.log(factory.getDex("UniswapV3Eth").getName());
-  factory.getDex("UniswapV3Eth").addLiquidityPool(tokenPair);
+  // Affichage des adresses des tokens
+  console.log(`Token A: ${tokenPair.tokenA}`);
+  console.log(`Token B: ${tokenPair.tokenB}`);
+
+  ethMainet.getDex("UniswapV3Eth").addLiquidityPool(tokenPair, ethMainet.getId());
 } catch (error) {
   console.error("Erreur lors de l'ajout de la liquidity pool :", error);
 }

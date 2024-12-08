@@ -1,6 +1,6 @@
-import { IPoolAddressResolver } from "../network/onChain/IPoolAddressResolver";
-import { PoolAddressResolver } from "../network/onChain/PoolAddressResolver";
-import { getInfuraNetwork } from "../network/onChain/rpcProvider/chains";
+import { IPoolAddressResolver } from "../../network/onChain/PoolAddressResolver/IPoolAddressResolver";
+import { PoolAddressResolver } from "../../network/onChain/PoolAddressResolver/PoolAddressResolver";
+import { getInfuraNetwork } from "../../network/onChain/rpcProvider/chains";
 
 /**
  * Abstract base class for Decentralized Exchange (DEX) interactions
@@ -8,7 +8,6 @@ import { getInfuraNetwork } from "../network/onChain/rpcProvider/chains";
 export abstract class Dex {
     protected name: string;
     protected version: number;
-    protected chainId: number;
     protected factoryAddress: string;
 
     protected poolAddressResolver : IPoolAddressResolver;
@@ -19,18 +18,15 @@ export abstract class Dex {
      * Constructor for DEX
      * @param name Dex's name
      * @param version Dex's version
-     * @param chainId Blockchain network ID
      * @param factoryAddress Contract address of the DEX factory
      */
     constructor(
         name: string,
         version: number,
-        chainId: number,
         factoryAddress: string,
     ) {
         this.name = name;
         this.version = version;
-        this.chainId = chainId;
         this.factoryAddress = factoryAddress;
         this.poolAddressResolver = new PoolAddressResolver();
     }
@@ -42,11 +38,6 @@ export abstract class Dex {
 
     public getVersion(): number {
         return this.version;
-    }
-
-    // New getters
-    public getChainId(): number {
-        return this.chainId;
     }
 
     public getFactoryAddress(): string {
@@ -76,5 +67,5 @@ export abstract class Dex {
      * @param pair pool's pair
      * @param poolAddress pool's address
      */
-    public abstract addLiquidityPool(pair: TokenPair): Promise<void>;
+    public abstract addLiquidityPool(pair: TokenPair, chainId: number): Promise<void>;
 }

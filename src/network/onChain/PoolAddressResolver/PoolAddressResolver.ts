@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
 import { IPoolAddressResolver } from "./IPoolAddressResolver";
-import { IRpcProvider } from "./rpcProvider/IRpcProvider";
-import { InfuraRpcProvider } from "./rpcProvider/InfuraRpcProvider";
-import UniswapV3FactoryABI from "../../abi/UniswapV3Factory.json";
-import { getInfuraNetwork } from "./rpcProvider/chains";
+import { IRpcProvider } from "../rpcProvider/IRpcProvider";
+import { InfuraRpcProvider } from "../rpcProvider/InfuraRpcProvider";
+import UniswapV3FactoryABI from "../../../abi/UniswapV3Factory.json";
+import { getInfuraNetwork } from "../rpcProvider/chains";
 
 export class PoolAddressResolver implements IPoolAddressResolver{
 
@@ -31,11 +31,6 @@ export class PoolAddressResolver implements IPoolAddressResolver{
             UniswapV3FactoryABI,
             provider
           );
-
-          //Log pool information
-          console.log(tokenA);
-          console.log(tokenB);
-          console.log(fee);
     
           const poolAddress: string = await factoryContract.getPool(tokenA, tokenB, fee);
           
